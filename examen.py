@@ -114,10 +114,28 @@ class App(customtkinter.CTk):
 
     def btn_informar_on_click(self):
         
+        informe = ""
         cantidad_vehiculos = len(self.lista_marca_vehiculo)
+
         total_servicios_ford = 0
         total_servicios_fiat = 0
         total_servicios_volvo = 0
+
+        contador_volvo = 0
+        contador_fiat = 0
+        contador_ford = 0
+
+        cantidad_autos_volvo = 0
+        cantidad_autos_fiat = 0
+        cantidad_autos_ford = 0
+
+        cantidad_camionetas_fiat = 0
+        cantidad_camionetas_ford = 0
+        cantidad_camionetas_volvo = 0
+
+        cantidad_motos_volvo = 0
+        cantidad_motos_fiat = 0
+        cantidad_motos_ford = 0
 
         for i in range (0, cantidad_vehiculos):
             marca_vehiculo = self.lista_marca_vehiculo[i]
@@ -125,13 +143,72 @@ class App(customtkinter.CTk):
 
             match marca_vehiculo:
                 case "ford":
+                    contador_ford += 1
                     match tipo_vehiculo:
                         case "auto":
                             total_servicios_ford += 15000
+                            cantidad_autos_ford += 1
                         case "camioneta":
                             total_servicios_ford += 25000
+                            cantidad_camionetas_ford += 1
                         case "moto":
                             total_servicios_ford += 10000
+                            cantidad_motos_ford += 1
+                case "fiat":
+                    contador_fiat += 1
+                    match tipo_vehiculo:
+                        case "auto":
+                            total_servicios_fiat += 15000
+                            cantidad_autos_fiat += 1
+                        case "camioneta":
+                            total_servicios_fiat += 25000
+                            cantidad_camionetas_fiat += 1
+                        case "moto":
+                            total_servicios_fiat += 10000
+                            cantidad_motos_fiat += 1
+                case "volvo":
+                    contador_volvo += 1
+                    match tipo_vehiculo:
+                        case "auto":
+                            total_servicios_volvo += 15000
+                            cantidad_autos_volvo += 1
+                        case "camioneta":
+                            total_servicios_volvo += 25000
+                            cantidad_camionetas_volvo += 1
+                        case "moto":
+                            total_servicios_volvo += 10000
+                            cantidad_motos_volvo += 1
+
+        if contador_volvo > 0:
+            promedio_servicios_volvo = total_servicios_volvo / contador_volvo
+        else:
+            promedio_servicios_volvo = "No hay ningún vehiculo de la marca volvo"
+        
+        if contador_fiat > 0:
+            promedio_servicios_fiat = total_servicios_fiat / contador_fiat
+        else:
+            promedio_servicios_fiat = "No hay ningún vehiculo de la marca fiat"
+
+        if contador_ford > 0:
+            promedio_servicios_ford = total_servicios_ford / contador_ford
+        else:
+            promedio_servicios_ford = "No hay ningún vehiculo de la marca ford"
+
+        if cantidad_vehiculos > 0:
+            informe += "Precio promedio de los servicios Ford: " + str(promedio_servicios_ford) + "\n"
+            informe += "Precio promedio de los servicios Fiat: " + str(promedio_servicios_fiat) + "\n"
+            informe += "Precio promedio de los servicios Volvo: " + str(promedio_servicios_volvo) + "\n"
+            informe += "Cantidad de autos ford: " + str(cantidad_autos_ford) + "\n"
+            informe += "Cantidad de motos ford: " + str(cantidad_motos_ford) + "\n"
+            informe += "Cantidad de camionetas ford: " + str(cantidad_camionetas_ford) + "\n"
+            informe += "Cantidad de autos fiat: " + str(cantidad_autos_fiat) + "\n"
+            informe += "Cantidad de motos fiat: " + str(cantidad_motos_fiat) + "\n"
+            informe += "Cantidad de camionetas fiat: " + str(cantidad_camionetas_fiat) + "\n"
+            informe += "Cantidad de autos volvo: " + str(cantidad_autos_volvo) + "\n"
+            informe += "Cantidad de motos volvo: " + str(cantidad_motos_volvo) + "\n"
+            informe += "Cantidad de camionetas volvo: " + str(cantidad_camionetas_volvo) + "\n"
+
+        alert("Informe", informe)
 
 
     
